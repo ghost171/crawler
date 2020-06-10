@@ -108,19 +108,21 @@ def crawl_for_lvl(url, given_lvl):
         len_queue_old -= 1
         marked, queue, crawled = visit_for_url(url, marked, queue, crawled, lvl, max_url)
         answer = requests.get(url)
-
-        answer1 = urllib.request.urlopen(url)
-
-        webContent = answer1.read()
-        url_for_download = ""
-        iterator = len(unquote(url)) - 1
-        while(url[iterator] != "/"):
-            url_for_download += (unquote(url)[iterator])
-            iterator -= 1
-        url_for_download = url_for_download[::-1]
-        f = open('WikiKz' + str(url_for_download) + str(lvl) + '.html', "w+")
-        f.write(str(webContent))
-        f.close()
+        try:
+            answer1 = urllib.request.urlopen(url)
+            webContent = answer1.read()
+            url_for_download = ""
+            iterator = len(unquote(url)) - 1
+            while(url[iterator] != "/"):
+                url_for_download += (unquote(url)[iterator])
+                iterator -= 1
+            url_for_download = url_for_download[::-1]
+            f = open('WikiKz' + str(url_for_download) + str(lvl) + '.html', "w+")
+            f.write(str(webContent))
+            f.close()
+        except:
+            pass
+        
         answer_max_url = requests.get(max_url)
         if (len(answer.text) > len(answer_max_url.text)):
             max_url = url
