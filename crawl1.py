@@ -13,15 +13,6 @@ import urllib.request, urllib.error, urllib.parse
 urlTemplate = r"/wiki/%[a-zA-Z_\.0-9/%]+"
 baseURL = "https://kk.wikipedia.org"
 
-
-def getFilename_fromCd(cd):
-    if not cd:
-        return None
-    fname = re.findall('filename=(.+)', cd)
-    if len(fname) == 0:
-        return None
-    return fname[0]
-
 def get_urls(url):
     print("crawling " + unquote(url))
     answer = requests.get(url=url)
@@ -62,16 +53,23 @@ def crawl(url, url2):
     while queue:
         url = queue.popleft()
         len_queue_old -= 1
-        marked, queue, crawled = visit(url, marked, queue, crawled, url2, lvl, max_url)
-        answer = requests.get(url, allow_redirects=True)
-        answer1 = urllib.request.urlopen(url)
-        webContent = answer1.read()
-        f = open('wikikz.html' + str(lvl), 'wb')
-        f.write(webContent)
-        f.close()
-        filename = getFilename_fromCd(r.headers.get('content-disposition'))
-        open(filename, 'wb').write(r.content)
 
+        marked, queue, crawled = visit(url, marked, queue, crawled, url2, lvl, max_url)
+        answer = requests.get(url)
+        try:
+            answer1 = urllib.request.urlopen(url)
+            webContent = answer1.read()
+            url_for_download = ""
+            iterator = len(unquote(url)) - 1
+            while(url[iterator] != "/"):
+                url_for_download += (unquote(url)[iterator])
+                iterator -= 1
+            url_for_download = url_for_download[::-1]
+            f = open('WikiKz' + str(url_for_download) + str(lvl) + '.html', "w+")
+            f.write(str(webContent))
+            f.close()
+        except:
+            pass
         answer_max_url = requests.get(max_url)
         if (len(answer.text) > len(answer_max_url.text)):
             max_url = url
@@ -109,11 +107,19 @@ def crawl_for_lvl(url, given_lvl):
         url = queue.popleft()
         len_queue_old -= 1
         marked, queue, crawled = visit_for_url(url, marked, queue, crawled, lvl, max_url)
-        answer = requests.get(url, allow_redirects=True)
+        answer = requests.get(url)
+
         answer1 = urllib.request.urlopen(url)
+
         webContent = answer1.read()
-        f = open('wikikz.html' + str(lvl), 'wb')
-        f.write(webContent)
+        url_for_download = ""
+        iterator = len(unquote(url)) - 1
+        while(url[iterator] != "/"):
+            url_for_download += (unquote(url)[iterator])
+            iterator -= 1
+        url_for_download = url_for_download[::-1]
+        f = open('WikiKz' + str(url_for_download) + str(lvl) + '.html', "w+")
+        f.write(str(webContent))
         f.close()
         answer_max_url = requests.get(max_url)
         if (len(answer.text) > len(answer_max_url.text)):
@@ -127,5 +133,5 @@ def crawl_for_lvl(url, given_lvl):
         
 
 
-crawl_for_lvl("https://kk.wikipedia.org/wiki/%D2%9A%D0%B0%D0%B7%D0%B0%D2%9B%D1%81%D1%82%D0%B0%D0%BD", 3)
+crawl("https://kk.wikipedia.org/wiki/%D2%9A%D0%B0%D0%B7%D0%B0%D2%9B%D1%81%D1%82%D0%B0%D0%BD", "https://kk.wikipedia.org/wiki/%D0%A1%D0%BE%D1%84%D0%B8%D1%8F")
 
