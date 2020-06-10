@@ -133,7 +133,25 @@ def crawl_for_lvl(url, given_lvl):
             print_report_for_lvl(crawled, max_url)
             exit()
         
-
-
-crawl("https://kk.wikipedia.org/wiki/%D2%9A%D0%B0%D0%B7%D0%B0%D2%9B%D1%81%D1%82%D0%B0%D0%BD", "https://kk.wikipedia.org/wiki/%D0%A1%D0%BE%D1%84%D0%B8%D1%8F")
+print("To use the program choose your service:")
+print("1. Find page from another page and statistics about path pages. Pick 1")
+print("2. Analyse all pages on 3 depth. Pick 2")
+service = input()
+if( service == 1):
+    print("Enter the start and final page ")
+    print("Start page:")
+    start_page = input()
+    print("Final page")
+    final_page = input()
+    crawl(start_page, final_page)
+elif (service == 2):
+    print("Enter the depth of search and the final page")
+    print("DEpth:")
+    depth = input()
+    print("Start page")
+    start_page = input()
+    crawl_for_lvl(start_page, depth)
+else:
+    print("Error! Receive 1 or 2.")
+    exit()
 
