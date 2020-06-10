@@ -64,6 +64,11 @@ def crawl(url, url2):
         len_queue_old -= 1
         marked, queue, crawled = visit(url, marked, queue, crawled, url2, lvl, max_url)
         answer = requests.get(url, allow_redirects=True)
+        answer1 = urllib.request.urlopen(url)
+        webContent = answer1.read()
+        f = open('wikikz.html' + str(lvl), 'wb')
+        f.write(webContent)
+        f.close()
         filename = getFilename_fromCd(r.headers.get('content-disposition'))
         open(filename, 'wb').write(r.content)
 
@@ -107,8 +112,7 @@ def crawl_for_lvl(url, given_lvl):
         answer = requests.get(url, allow_redirects=True)
         answer1 = urllib.request.urlopen(url)
         webContent = answer1.read()
-        name = str(url) + str(lvl) 
-        f = open(name, 'w')
+        f = open('wikikz.html' + str(lvl), 'wb')
         f.write(webContent)
         f.close()
         answer_max_url = requests.get(max_url)
