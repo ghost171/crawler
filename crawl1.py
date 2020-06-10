@@ -6,13 +6,21 @@ import requests
 from urllib.request import urlopen
 import re
 import multiprocessing as mp
-
-
+import requests
+import re
+import urllib.request, urllib.error, urllib.parse
 
 urlTemplate = r"/wiki/%[a-zA-Z_\.0-9/%]+"
 baseURL = "https://kk.wikipedia.org"
 
 
+def getFilename_fromCd(cd):
+    if not cd:
+        return None
+    fname = re.findall('filename=(.+)', cd)
+    if len(fname) == 0:
+        return None
+    return fname[0]
 
 def get_urls(url):
     print("crawling " + unquote(url))
@@ -55,7 +63,10 @@ def crawl(url, url2):
         url = queue.popleft()
         len_queue_old -= 1
         marked, queue, crawled = visit(url, marked, queue, crawled, url2, lvl, max_url)
-        answer = requests.get(url)
+        answer = requests.get(url, allow_redirects=True)
+        filename = getFilename_fromCd(r.headers.get('content-disposition'))
+        open(filename, 'wb').write(r.content)
+
         answer_max_url = requests.get(max_url)
         if (len(answer.text) > len(answer_max_url.text)):
             max_url = url
@@ -93,7 +104,13 @@ def crawl_for_lvl(url, given_lvl):
         url = queue.popleft()
         len_queue_old -= 1
         marked, queue, crawled = visit_for_url(url, marked, queue, crawled, lvl, max_url)
-        answer = requests.get(url)
+        answer = requests.get(url, allow_redirects=True)
+        answer1 = urllib.request.urlopen(url)
+        webContent = answer1.read()
+        name = str(url) + str(lvl) 
+        f = open(name, 'w')
+        f.write(webContent)
+        f.close()
         answer_max_url = requests.get(max_url)
         if (len(answer.text) > len(answer_max_url.text)):
             max_url = url
