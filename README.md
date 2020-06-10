@@ -19,11 +19,15 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 
 ## What do this program?
 This program contains two lines of purpouses:
-1) Find the current site from the start site and print the biggest site on the path, and count of sites that we have visited.
-2) Crawling all the sites to the three-depth length and print the biggest site on the path, and count of sites that we have visited.
-### Info for line 1):
+1. Find the current site from the start site and print the biggest site on the path, and count of sites that we have visited.
+2. Crawling all the sites to the three-depth length and print the biggest site on the path, and count of sites that we have visited.
+### Regular expression:
+We find the sites url with this regular expression:
+
+    r"/wiki/%[a-zA-Z_\.0-9/%]+"
+### Info for line 1:
 In this function the start site and finish site you need indicate as arguments to function crawl(url, url2).
-### Info for line 2):
+### Info for line 2
 In this function the start site and crawl-level  you need indicate as arguments to function crawl_for_lvl(url, given_lvl).
 ### Downloading pages:
 Also, we can download pages that met on our way with a bit of code:
