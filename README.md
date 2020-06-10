@@ -22,10 +22,11 @@ In this function the start site and finish site you need indicate as arguments t
 ### Info for line 2):
 In this function the start site and crawl-level  you need indicate as arguments to function crawl_for_lvl(url, given_lvl).
 ## Functions:
-def get_urls(url):
-def print_report(crawled, lvl, max_url):
-def visit(url, marked, queue, crawled, url2, lvl, max_url):
-def crawl(url, url2):
-def print_report_for_lvl(crawled, max_url):
-def visit_for_url(url, marked, queue, crawled, lvl, max_url):
-def crawl_for_lvl(url, given_lvl):  
+
+    def get_urls(url):
+    def print_report(crawled, lvl, max_url):
+    def visit(url, marked, queue, crawled, url2, lvl, max_url):
+    def crawl(url, url2):
+    def print_report_for_lvl(crawled, max_url):
+    def visit_for_url(url, marked, queue, crawled, lvl, max_url):
+    def crawl_for_lvl(url, given_lvl):  
