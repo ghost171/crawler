@@ -9,3 +9,23 @@ The number of Internet pages is extremely large; even the largest crawlers fall 
 
 Crawlers can validate hyperlinks and HTML code. They can also be used for web scraping (see also data-driven programming). 
 
+## How to download this program:
+
+    git clone https://github.com/ghost171/crawler
+
+## What do this program?
+This program contains two lines of purpouses:
+1) Find the current site from the start site and print the biggest site on the path, and count of sites that we have visited.
+2) Crawling all the sites to the three-depth length and print the biggest site on the path, and count of sites that we have visited.
+### Info for line 1):
+In this function the start site and finish site you need indicate as arguments to function crawl(url, url2).
+### Info for line 2):
+In this function the start site and crawl-level  you need indicate as arguments to function crawl_for_lvl(url, given_lvl).
+## Functions:
+def get_urls(url):
+def print_report(crawled, lvl, max_url):
+def visit(url, marked, queue, crawled, url2, lvl, max_url):
+def crawl(url, url2):
+def print_report_for_lvl(crawled, max_url):
+def visit_for_url(url, marked, queue, crawled, lvl, max_url):
+def crawl_for_lvl(url, given_lvl):  
