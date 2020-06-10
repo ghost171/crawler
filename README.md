@@ -25,6 +25,20 @@ This program contains two lines of purpouses:
 In this function the start site and finish site you need indicate as arguments to function crawl(url, url2).
 ### Info for line 2):
 In this function the start site and crawl-level  you need indicate as arguments to function crawl_for_lvl(url, given_lvl).
+### Downloading pages:
+Also, we can download pages that met on our way with a bit of code:
+
+    answer1 = urllib.request.urlopen(url)
+        webContent = answer1.read()
+        url_for_download = ""
+        iterator = len(unquote(url)) - 1
+        while(url[iterator] != "/"):
+            url_for_download += (unquote(url)[iterator])
+            iterator -= 1
+        url_for_download = url_for_download[::-1]
+        f = open('WikiKz' + str(url_for_download) + str(lvl) + '.html', "w+")
+        f.write(str(webContent))
+        f.close()
 ## Functions:
 
     def get_urls(url):
