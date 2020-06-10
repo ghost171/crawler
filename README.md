@@ -16,7 +16,20 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 ## How to execute this program:
 
     python3 crawl1.py
-
+## How to use the program?
+In the start you have to choose what kind of service you want to exploit:
+1. If you want to searching final page from start and page-on-the-depth-analytics. You must pick 1.
+2. If tou want to anlytics all pages by some depth. You must pick 2.
+### Service 1
+If you choose service 1. You must enter start and final page.
+Example:
+https://kk.wikipedia.org/wiki/%D2%9A%D0%B0%D0%B7%D0%B0%D2%9B%D1%81%D1%82%D0%B0%D0%BD
+https://kk.wikipedia.org/wiki/%D0%A3%D0%B8%D0%BA%D0%B8
+### Service 1
+If you choose service 2. You must enter start page anbd depth for analytics.
+Example: 
+https://kk.wikipedia.org/wiki/%D2%9A%D0%B0%D0%B7%D0%B0%D2%9B%D1%81%D1%82%D0%B0%D0%BD 
+3
 ## What do this program?
 This program contains two lines of purpouses:
 1. Find the current site from the start site and print the biggest site on the path, and count of sites that we have visited.
