@@ -13,6 +13,10 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 
     git clone https://github.com/ghost171/crawler
 
+## How to execute this program:
+
+    python3 crawl1.py
+
 ## What do this program?
 This program contains two lines of purpouses:
 1) Find the current site from the start site and print the biggest site on the path, and count of sites that we have visited.
